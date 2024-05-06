@@ -1,6 +1,6 @@
 import React from "react"
 
-interface Book {
+export default interface Book {
     id: string;
     title: string;
     subtitle: string;
@@ -13,5 +13,3 @@ interface Book {
     cover: string;
     userId: number;
 }
-
-export default Book
