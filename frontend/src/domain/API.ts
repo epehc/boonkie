@@ -61,6 +61,12 @@ export const deleteBook = async (isbn: string) => {
 
 //Additional Operations
 
+export const getFirstBooks = async (count: number) => {
+    const response = await fetch(`${API_URL}/books?_limit=${count}`);
+    return response.json();
+
+}
+
 /**
  * Get all books sorted by title in descending order
  */
