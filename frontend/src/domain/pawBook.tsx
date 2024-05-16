@@ -10,5 +10,6 @@ export const pawBook: Book = {
     "price": "$31.02",
     "numPages": 354,
     "cover": "http://localhost:4730/covers/9781787125421.png",
-    "userId": 1
+    "userId": 1,
+    "like": false
 }
