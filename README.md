@@ -1,6 +1,6 @@
 # Boonkie
 
-## Front End Development Project Summer Semester 2024 HTW Berlin
+### Front-End Development Project Summer Semester 2024 HTW Berlin
 ### Jose Cardona
 Matrikelnr. 577913
 
