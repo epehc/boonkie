@@ -8,6 +8,8 @@ Matrikelnr. 577913
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+run `npm install` to install all the dependencies.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -19,6 +21,22 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `npm run start:api`
+
+Runs the bookmonkey server.\
+Open [http://localhost:4730](http://localhost:4730) to view the documentation.
+
+### `npm run start:all` or `bookmonkey-api`
+
+Runs the app in the development mode and the bookmonkey server using concurrently.\
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.\
+The page will reload if you make edits.\
+You will also see any lint errors in the console.\
+
+Open [http://localhost:4730](http://localhost:4730) to view the bookmonkey documentation.
+
 
 ### `npm test`
 
