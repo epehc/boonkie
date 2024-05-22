@@ -1,3 +1,9 @@
+# Boonkie
+
+## Front End Development Project Summer Semester 2024 HTW Berlin
+### Jose Cardona
+Matrikelnr. 577913
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
