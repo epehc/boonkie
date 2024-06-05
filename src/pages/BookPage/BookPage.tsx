@@ -37,9 +37,7 @@ const BookPage = () => {
                         <Button sx= {{width: '80%'}} variant="text" color="primary" onClick={() => navigate('/')}>Back to Books</Button>
                     </Box>
                     {book.cover === "" ? <img src={AltCover} alt="No Cover" style={{ maxWidth: '100%', height: 'auto' }}/> : <img src={book.cover} alt="Cover" style={{ maxWidth: '100%', height: 'auto' }}/>}
-                    <Divider />
-                    <Typography variant="subtitle1">About this book:</Typography>
-                    <Typography variant="body1" sx={{marginBottom: '20px'}}>{book.abstract}</Typography>
+
                 </Stack>
             </Grid>
             <Grid xs={5}>
@@ -52,13 +50,9 @@ const BookPage = () => {
                     <Typography variant="body2">ISBN: {book.isbn}</Typography>
                     <Typography variant="body2">{book.numPages} pages</Typography>
                     <Typography variant="h5" color="primary">Price: {book.price}</Typography>
-                    <Button variant="contained" color="primary">
-                        Add to Cart
-                    </Button>
-                    <Button variant="outlined" color="secondary">
-                        Add to Wishlist
-                    </Button>
-
+                    <Divider />
+                    <Typography variant="subtitle1">About this book:</Typography>
+                    <Typography variant="body1" sx={{marginBottom: '20px'}}>{book.abstract}</Typography>
                 </Stack>
             </Grid>
             <Grid xs={2} />
