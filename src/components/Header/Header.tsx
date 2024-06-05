@@ -1,12 +1,56 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import {AppBar, Toolbar, IconButton, Button, ButtonGroup} from '@mui/material';
 import Logo from '../../assets/logo.png';
+import {useNavigate} from "react-router-dom";
+import {useTheme} from "@mui/material/styles";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 
-const Header = () => {
+interface HeaderProps {
+    loggedIn: boolean
+    onLogOut: () => void
+}
+
+const Header: React.FC<HeaderProps> = ({loggedIn, onLogOut}) => {
+    const theme = useTheme()
+    const navigate = useNavigate();
+
+    const handleNavigateHome = () => {
+        navigate('/books');
+    }
+
+    const handleNavigateLoginScreen = () => {
+        navigate('/login');
+    }
+
+    const handleLogout = () => {
+        onLogOut()
+        navigate('/books');
+    }
+
+
     return (
-        <AppBar position="static" color="primary">
-            <Toolbar>
-                <img src={Logo} alt="Logo" style={{height: 40, marginRight: 10}}/>
+        <AppBar position="sticky" sx={{bgColor: theme.palette.primary.main}}>
+            <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
+                <img onClick={handleNavigateHome} src={Logo} alt="Logo" style={{height: 40, marginRight: 10}}/>
+                <ButtonGroup sx={{position: "flex-end"}}>
+                    {
+                        loggedIn ?
+                            <Button variant="text" sx={{color: theme.palette.text.primary}} onClick={handleLogout}>
+                                <IconButton color="inherit">
+                                    <NoAccountsIcon/>
+                                </IconButton>
+                                LOG OUT
+                            </Button>
+                            :
+                            <Button variant="text" sx={{color: theme.palette.text.primary}} onClick={handleNavigateLoginScreen}>
+                                <IconButton color="inherit">
+                                    <AccountCircleIcon/>
+                                </IconButton>
+                                LOG IN
+                            </Button>
+                    }
+                </ButtonGroup>
             </Toolbar>
         </AppBar>
     );
