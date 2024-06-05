@@ -7,12 +7,6 @@ const AboutPage = () => {
     const navigate = useNavigate()
 
     return(
-        /*
-        Boonkie
-Front-End Development Project Summer Semester 2024 HTW Berlin
-Jose Cardona
-Matrikelnr. 577913
-         */
         <Box sx={{marginLeft: '50px', marginTop: '20px'}}>
             <Box>
                 <Button  variant="text" color="primary" onClick={() => navigate('/')}>Back to Start</Button>
