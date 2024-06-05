@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {CssBaseline, Link} from '@mui/material';
+import {CssBaseline} from '@mui/material';
 import BookListPage from "./pages/BookListPage/BookListPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {useBooks} from "./domain/hooks";
 import {Route, BrowserRouter as Router, Routes, Navigate} from "react-router-dom";
 import BookPage from "./pages/BookPage/BookPage";
-import Book from "./domain/Book";
-import {pawBook} from "./domain/pawBook";
 import CreateBookPage from "./pages/CreateBookPage/CreateBookPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import EditBookModal from "./components/BookListPageRow/EditBookModal";
 import EditBookModal2 from "./components/BookListPageRow/EditBookModal2";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 // Define the custom theme
 const theme = createTheme({
@@ -82,10 +80,11 @@ const App = () => {
                     }>
                         <Route path="/books/:id/edit" element={<EditBookModal2 refresh={refresh}/>}/>
                     </Route>
-                    <Route path="/books/:id" element={ <BookPage/>}/>
+                    <Route path="/books/:id" element={<BookPage/>}/>
                     <Route path="/new" element={<CreateBookPage refresh={refresh}/>}/>
                     <Route path="/login" element={<LoginPage onLogin={handleLogin} refresh={refresh}/>}/>
                     <Route path="/register" element={<RegisterPage onRegister={handleLogin} refresh={refresh}/>}/>
+                    <Route path="/about" element={<AboutPage/>}/>
                 </Routes>
                 <Footer/>
             </Router>
