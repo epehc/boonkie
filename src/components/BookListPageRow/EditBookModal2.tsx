@@ -3,7 +3,6 @@ import {useParams} from "react-router-dom";
 import Book from "../../domain/Book";
 import {pawBook} from "../../domain/pawBook";
 import {getBook, updateBook} from "../../domain/API";
-import book from "../../domain/Book";
 import EditBookModal from "./EditBookModal";
 
 interface EditBookModal2Props{

@@ -83,7 +83,7 @@ const EditBookModal: React.FC<EditBookModalProps> = ({book, open, onClose, onEdi
                         <TextField label="Number of Pages" name="numPages" value={editedBook.numPages} onChange={handleInputChange} sx={{width: '100%', marginBottom: '20px'}}/>
                     </Grid>
                     <Grid xs={6}>
-                        <TextField label="Cover" name="cover" value={editedBook.cover} onChange={handleInputChange} sx={{width: '100%', marginBottom: '20px'}}/>
+                        <TextField label="ISBN" name="isbn" value={editedBook.isbn} onChange={handleInputChange} sx={{width: '100%', marginBottom: '20px'}}/>
                     </Grid>
                 </Grid>
                 <TextField multiline rows={5} label="About" name="abstract" value={editedBook.abstract} onChange={handleInputChange} sx={{width: '100%', marginBottom: '20px'}}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Toolbar, IconButton, Button, ButtonGroup} from '@mui/material';
+import {AppBar, Toolbar, Button, ButtonGroup} from '@mui/material';
 import Logo from '../../assets/logo.png';
 import {useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
@@ -36,17 +36,13 @@ const Header: React.FC<HeaderProps> = ({loggedIn, onLogOut}) => {
                 <ButtonGroup sx={{position: "flex-end"}}>
                     {
                         loggedIn ?
-                            <Button variant="text" sx={{color: theme.palette.text.primary}} onClick={handleLogout}>
-                                <IconButton color="inherit">
-                                    <NoAccountsIcon/>
-                                </IconButton>
+                            <Button variant="text" sx={{color: theme.palette.text.primary}}
+                                    onClick={handleLogout} startIcon={<NoAccountsIcon/>}>
                                 LOG OUT
                             </Button>
                             :
-                            <Button variant="text" sx={{color: theme.palette.text.primary}} onClick={handleNavigateLoginScreen}>
-                                <IconButton color="inherit">
-                                    <AccountCircleIcon/>
-                                </IconButton>
+                            <Button variant="text" sx={{color: theme.palette.text.primary}}
+                                    onClick={handleNavigateLoginScreen} startIcon={<AccountCircleIcon/>}>
                                 LOG IN
                             </Button>
                     }

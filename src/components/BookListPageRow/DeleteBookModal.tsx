@@ -9,7 +9,6 @@ interface DeleteBookModalProps {
     onDeleteBook: (book: Book) => void
 }
 
-
 const DeleteBookModal: React.FC<DeleteBookModalProps> = ({book, open, onClose, onDeleteBook}) => {
 
     const handleDelete = () => {
