@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import {Box, Button, Divider, Stack, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
-import Book from "../../domain/Book";
+import Book from "../domain/Book";
 import {useNavigate, useParams} from "react-router-dom";
-import {pawBook} from "../../domain/pawBook";
-import {getBook} from "../../domain/API";
-import AltCover from "../../assets/noLogo.png";
+import {pawBook} from "../domain/pawBook";
+import {getBook} from "../domain/API";
+import AltCover from "../assets/noLogo.png";
 
 const BookPage = () => {
     const theme = useTheme(); // Access the theme to use its values directly in style props if needed
@@ -37,7 +37,6 @@ const BookPage = () => {
                         <Button sx= {{width: '80%'}} variant="text" color="primary" onClick={() => navigate('/')}>Back to Books</Button>
                     </Box>
                     {book.cover === "" ? <img src={AltCover} alt="No Cover" style={{ maxWidth: '100%', height: 'auto' }}/> : <img src={book.cover} alt="Cover" style={{ maxWidth: '100%', height: 'auto' }}/>}
-
                 </Stack>
             </Grid>
             <Grid xs={5}>

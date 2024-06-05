@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import {Button, TextField, Box, InputAdornment, ButtonGroup} from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-import NewBook from "../../domain/NewBook";
-import Book from "../../domain/Book";
-import {createBook} from "../../domain/API";
+import NewBook from "../domain/NewBook";
+import Book from "../domain/Book";
+import {createBook} from "../domain/API";
 
 interface CreateBookPageProps {
     refresh: () => void

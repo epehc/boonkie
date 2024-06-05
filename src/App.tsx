@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {CssBaseline} from '@mui/material';
-import BookListPage from "./pages/BookListPage/BookListPage";
+import BookListPage from "./pages/BookListPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {useBooks} from "./domain/hooks";
 import {Route, BrowserRouter as Router, Routes, Navigate} from "react-router-dom";
-import BookPage from "./pages/BookPage/BookPage";
-import CreateBookPage from "./pages/CreateBookPage/CreateBookPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
+import BookPage from "./pages/BookPage";
+import CreateBookPage from "./pages/CreateBookPage";
+import LoginPage from "./pages/LoginPage";
 import EditBookModal2 from "./components/BookListPageRow/EditBookModal2";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import AboutPage from "./pages/AboutPage/AboutPage";
+import RegisterPage from "./pages/RegisterPage";
+import AboutPage from "./pages/AboutPage";
 
 // Define the custom theme
 const theme = createTheme({
@@ -23,7 +23,6 @@ const theme = createTheme({
         secondary: {
             main: '#0c84ae',  // scooter-600
             light: '#ecfdff', // scooter-300
-            //variant: '#6adcf6', // scooter-300
             dark: '#116a8d',  // scooter-700
         },
         background: {

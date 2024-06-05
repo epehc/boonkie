@@ -1,7 +1,7 @@
 import React from "react";
 import {TableContainer, Table, TableCell, TableRow, Box, Button, TableBody, TableHead} from "@mui/material";
-import Book from "../../domain/Book";
-import BookListPageRow from "../../components/BookListPageRow/BookListPageRow";
+import Book from "../domain/Book";
+import BookListPageRow from "../components/BookListPageRow/BookListPageRow";
 import Pagination from "@mui/material/Pagination";
 import {useTheme} from "@mui/material/styles";
 import {Outlet, useNavigate} from "react-router-dom";
