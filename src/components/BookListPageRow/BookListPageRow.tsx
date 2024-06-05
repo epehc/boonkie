@@ -22,8 +22,6 @@ const BookListPageRow: React.FC<BookTableRowProps> = ({ book, loggedIn, refresh 
 
     const navigate = useNavigate();
 
-    //const tempLoggedIn = true;
-
 
     const handleSelectBook = () => {
         navigate(`/books/${book.id}`)
@@ -51,7 +49,6 @@ const BookListPageRow: React.FC<BookTableRowProps> = ({ book, loggedIn, refresh 
             console.error("Error deleting book", error)
         })
     }
-
 
     return (
         <>
