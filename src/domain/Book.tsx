@@ -1,18 +1,10 @@
-import React from "react"
 
-interface Book {
+import NewBook from "./NewBook";
+
+interface Book extends NewBook {
     id: string;
-    title: string;
-    subtitle: string;
     isbn: string;
-    abstract: string;
-    author: string;
-    publisher: string;
-    price: string;
-    numPages: number;
-    cover: string;
     userId: number;
-    like: boolean;
 }
 
 export default Book;
