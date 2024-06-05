@@ -39,7 +39,6 @@ const CreateBookPage: React.FC<CreateBookPageProps> = ({refresh}) => {
         }catch (e){
             console.error(e)
         }
-        // Here you can handle the form submission, e.g., send the data to an API
     };
 
     const handleCancel = () => {
