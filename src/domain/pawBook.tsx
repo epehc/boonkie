@@ -11,5 +11,4 @@ export const pawBook: Book = {
     "numPages": 354,
     "cover": "http://localhost:4730/covers/9781787125421.png",
     "userId": 1,
-    "like": false
 }
