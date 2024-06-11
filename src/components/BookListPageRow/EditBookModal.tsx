@@ -40,7 +40,13 @@ const EditBookModal: React.FC<EditBookModalProps> = ({book, open, onClose, onEdi
 
     const handleClose = () => {
         setUpdateSuccess(false)
-        navigate('/books')
+        navigate(`/books/${book.isbn}`)
+        onClose()
+    }
+
+    const handleCancel = () => {
+        setUpdateSuccess(false)
+        navigate(-1)
         onClose()
     }
 
@@ -113,7 +119,7 @@ const EditBookModal: React.FC<EditBookModalProps> = ({book, open, onClose, onEdi
                 </Collapse>
                 <ButtonGroup sx={{width: '50%', display: 'flex', justifyContent: 'space-around', padding: '20px', marginTop: '20px',}} >
                     <Button variant="contained" color="primary" onClick={handleEditBook} sx={{width:'100px'}}>Save</Button>
-                    <Button variant="contained" color="secondary" onClick={handleClose} sx={{width:'100px'}}>Cancel</Button>
+                    <Button variant="contained" color="secondary" onClick={handleCancel} sx={{width:'100px'}}>Cancel</Button>
                 </ButtonGroup>
             </Box>
         </Modal>

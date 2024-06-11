@@ -3,7 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import {Alert, Box, Button, Collapse, Divider, IconButton, Stack, Typography} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import Book from "../domain/Book";
-import {useNavigate, useParams} from "react-router-dom";
+import {Outlet, useNavigate, useParams} from "react-router-dom";
 import {pawBook} from "../domain/pawBook";
 import {getBook, updateBook} from "../domain/API";
 import AltCover from "../assets/noLogo.png";
@@ -11,6 +11,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
 import {useSelector} from "react-redux";
 import {RootState} from "../state/store";
+import EditIcon from '@mui/icons-material/Edit';
 
 const BookPage = () => {
     const theme = useTheme();
@@ -40,19 +41,17 @@ const BookPage = () => {
 
     const handleAddBookToCart = () => {
         book.userId = 2
-        updateBook(book)
-        setUpdateSuccess(true)
-        setCartButtonDisabled(true)
-    }
-
-    const handleNavigateToCart = () => {
-        navigate('/cart')
+        updateBook(book).then((updatedBook) => {
+            setBook(updatedBook)
+            setUpdateSuccess(true)
+            setCartButtonDisabled(true)
+        })
 
     }
 
     useEffect(() => {
         fetchBook().then(() => console.log("Book fetched"))
-    }, [])
+    }, [navigate])
 
     return (
         <Box sx={{display: 'flex', justifyContent: 'center', height: '60vh', marginTop:'10vh', marginBottom: '10vh'}}>
@@ -78,10 +77,13 @@ const BookPage = () => {
                             {!isAdmin &&
                                 <Button disabled={cartButtonDisabled} variant="contained" color="primary" startIcon={<ShoppingCartIcon/>} onClick={handleAddBookToCart}>Add to Cart</Button>
                             }
+                            {isAdmin &&
+                                <Button  variant="contained" color="primary" startIcon={<EditIcon/>} onClick={() => navigate(`/books/${book.id}/edit-book`)}>Edit book</Button>
+                            }
                             <Collapse in={updateSuccess}>
                                 <Alert severity="success" variant="filled"  onClose={handleCloseAlert} action={
                                     <>
-                                        <Button color="inherit" size="small" onClick={handleNavigateToCart}>
+                                        <Button color="inherit" size="small" onClick={() => navigate('/cart')}>
                                             <u>Go to cart</u>
                                         </Button>
                                         <IconButton
@@ -101,6 +103,7 @@ const BookPage = () => {
                     </Grid>
                 </Grid>
             </Box>
+            <Outlet/>
         </Box>
 
     );

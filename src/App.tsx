@@ -46,12 +46,12 @@ const App = () => {
                     <Header/>
                     <Routes>
                         <Route path="/" element={<Navigate to={"/login"}/>}/>
-                        <Route path="/books" element={
-                            <BookListPage/>
-                        }>
+                        <Route path="/books" element={<BookListPage/>}>
                             <Route path="/books/:id/edit" element={<EditBookModal2/>}/>
                         </Route>
-                        <Route path="/books/:id" element={<BookPage/>}/>
+                        <Route path="/books/:id/*" element={<BookPage/>}>
+                            <Route path="edit-book" element={<EditBookModal2/>}/>
+                        </Route>
                         <Route path="/new" element={<CreateBookPage/>}/>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/about" element={<AboutPage/>}/>

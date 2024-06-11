@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Book from "../../domain/Book";
 import {pawBook} from "../../domain/pawBook";
 import {getBook, updateBook} from "../../domain/API";
@@ -13,8 +13,6 @@ const EditBookModal2 = () => {
     const [book, setBook] = useState<Book >(pawBook);
     const [open, setOpen] = useState<boolean>(true);
 
-    const navigate = useNavigate()
-
     useEffect(() => {
         getBook(id).then((book) => {
             setBook(book);
@@ -25,7 +23,6 @@ const EditBookModal2 = () => {
     
     const handleClose =  () => {
         setOpen(false);
-        navigate('/books')
     }
 
     const handleEditBook = (editedBook: Book) => {
