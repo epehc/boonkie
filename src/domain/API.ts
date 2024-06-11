@@ -1,5 +1,4 @@
 import Book from "./Book";
-import User from "./User";
 
 const API_URL = 'http://localhost:4730'; // replace with your backend URL
 
@@ -45,7 +44,18 @@ export const createBook = async (book: Book) => {
             },
             body: JSON.stringify(book),
         });
-        return response.json();
+
+        let data = await response.json();
+
+        if (!response.ok) {
+            let errorMessage = ''
+            for(let key in data.errors){
+                errorMessage += data.errors[key].msg + '\n';
+            }
+            throw new Error(errorMessage.trim());
+        }
+
+        return data;
     }catch(error){
         console.error(error);
         throw error;
@@ -56,19 +66,31 @@ export const createBook = async (book: Book) => {
  * Update a book
  */
 export const updateBook = async (book: Book) => {
-    try {
-        const response = await fetch(`${API_URL}/books/${book.isbn}`, {
+
+        const response = await fetch(`${API_URL}/books/${book.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(book),
         });
-        return response.json();
-    }catch(error){
-        console.error(error);
-        throw error;
-    }
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(response.statusText)
+            let errorMessage = ''
+             // Log the entire data object
+            for(let key in data.errors){
+                console.log(key)
+                errorMessage += data.errors[key].msg + ' ';
+            }
+            console.log(errorMessage)
+            throw new Error(errorMessage);
+        }
+
+        return data;
+
 };
 
 /**
@@ -79,6 +101,11 @@ export const deleteBook = async (isbn: string) => {
         const response = await fetch(`${API_URL}/books/${isbn}`, {
             method: 'DELETE',
         });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete book. Please try again.');
+        }
+
         return response.json();
     }catch(error){
         console.error(error);
@@ -86,20 +113,17 @@ export const deleteBook = async (isbn: string) => {
     }
 };
 
-//--------------Additional Operations------------------
-
-/**
- * Get a specific amount of books
- */
-export const getFirstBooks = async (count: number) => {
-    try {
-        const response = await fetch(`${API_URL}/books?_limit=${count}`);
+export const getBooksForCart = async () => {
+    try{
+        const response = await fetch(`${API_URL}/users/2/books`);
         return response.json();
     }catch(error){
         console.error(error);
         throw error;
     }
 }
+
+//--------------Additional Operations------------------
 
 /**
  * Get Books by page
@@ -107,102 +131,43 @@ export const getFirstBooks = async (count: number) => {
 export const getBooksByPage = async (page: number, limit: number) => {
     try {
         const response = await fetch(`${API_URL}/books?_page=${page}&_limit=${limit}`);
+
+        if (!response.ok) {
+
+            throw new Error('Failed to retrieve books. Please try again.');
+        }
+
         return response.json();
+
     }catch(error){
         console.error(error);
         throw error;
     }
 }
 
-/**
- * Get all books sorted by title in descending order
- */
-export const getBooksSortedByTitleDescending = async () => {
-    try {
-        const response = await fetch(`${API_URL}/books?_sort=title&_order=desc`);
-        return response.json();
-    }catch(error) {
-        console.error(error);
-        throw error;
-    }
-}
+//---------------Log in---------------------
 
 /**
- * Get all books sorted by title in ascending order
+ * Log in a user
  */
-export const getBooksSortedByTitleAscending = async () => {
-    try {
-        const response = await fetch(`${API_URL}/books?_sort=title`);
-        return response.json();
-    }catch(error) {
-        console.error(error);
-        throw error;
-    }
-}
-
-/**
- * Get all books sorted by author in descending order
- */
-export const getBooksSortedByAuthorDescending = async () => {
-    try {
-        const response = await fetch(`${API_URL}/books?_sort=author&_order=desc`);
-        return response.json();
-    }catch(error) {
-        console.error(error);
-        throw error;
-    }
-}
-
-/**
- * Get all books sorted by author in ascending order
- */
-export const getBooksSortedByAuthorAscending = async () => {
-    try {
-        const response = await fetch(`${API_URL}/books?_sort=author`);
-        return response.json();
-    }catch(error) {
-        console.error(error);
-        throw error;
-    }
-}
-
-//---------------Log in / Register---------------------
-
-
-export const login = async (user: User) => {
+export const login = async (email: string, password: string) => {
     try {
         const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({email, password}),
         });
-        if (!response.ok) {
-            throw new Error(response.status.toString() + ": " + response.statusText)
-        }
-        return response.json();
-    }catch(error){
-        console.error(error);
-        throw error;
-    }
-}
 
-export const registerUser = async (user: User) => {
-    try {
-        const response = await fetch(`${API_URL}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        });
+        const data = await response.json();
+
         if (!response.ok) {
-            throw new Error(response.status.toString() + ": " + response.statusText)
+            throw new Error(data + '. Please try again.');
         }
-        return response.json();
-    }catch(error){
-        console.error(error);
+
+        return data;
+    } catch (error) {
         throw error;
     }
 }
