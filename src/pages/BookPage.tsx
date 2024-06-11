@@ -55,9 +55,9 @@ const BookPage = () => {
     }, [])
 
     return (
-        <Box sx={{display: 'flex', justifyContent: 'center', height: '60vh'}}>
+        <Box sx={{display: 'flex', justifyContent: 'center', height: '60vh', marginTop:'10vh', marginBottom: '10vh'}}>
             <Box sx={{display: 'flex', justifyContent: 'center',  width: '70%'}}>
-                <Grid container spacing={15} style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: theme.palette.background.default }}>
+                <Grid container spacing={15} style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: theme.palette.background.paper, borderRadius: '1.5rem' }}>
                     <Grid xs={4}>
                         <Button sx= {{width: '100%', marginBottom: '20px'}} variant="text" color="primary" onClick={() => navigate('/books')}><u>Back to Books</u></Button>
                         {book.cover === "" ? <img src={AltCover} alt="No Cover" style={{ maxWidth: '100%', height: 'auto', marginTop:'20px' }}/> : <img src={book.cover} alt="Cover" style={{ width: '100%', height: 'auto' }}/>}
