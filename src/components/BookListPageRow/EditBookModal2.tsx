@@ -1,20 +1,19 @@
 import React, {useEffect, useState} from "react"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Book from "../../domain/Book";
 import {pawBook} from "../../domain/pawBook";
 import {getBook, updateBook} from "../../domain/API";
 import EditBookModal from "./EditBookModal";
+import {useBooks} from "../../domain/hooks";
 
-interface EditBookModal2Props{
-    refresh: () => void;
-}
-
-
-const EditBookModal2: React.FC<EditBookModal2Props> = ({refresh}) => {
+const EditBookModal2 = () => {
+    const {refresh} = useBooks()
     const {id} = useParams() as {id: string};
 
     const [book, setBook] = useState<Book >(pawBook);
     const [open, setOpen] = useState<boolean>(true);
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getBook(id).then((book) => {
@@ -24,27 +23,43 @@ const EditBookModal2: React.FC<EditBookModal2Props> = ({refresh}) => {
         })
     }, [id]);
     
-    const handleClose = () => {
+    const handleClose =  () => {
         setOpen(false);
-        refresh()
+        navigate('/books')
     }
-    
+
     const handleEditBook = (editedBook: Book) => {
-        updateBook(editedBook).then(() => {
-            setBook(editedBook)
-            console.log(editedBook)
-            handleClose()
-        }).catch((error) => {
-            console.error("Error updating book", error)
-        })
-    }
+        return new Promise<void>((resolve, reject) => {
+
+            if (!editedBook.title) {
+                reject(new Error('Title is required'));
+                return;
+            }
+
+            if (!editedBook.isbn) {
+                reject(new Error('ISBN is required'));
+                return;
+            }
+            updateBook(editedBook)
+                .then(() => {
+                    setBook(editedBook);
+                    refresh()
+                        .then(() => {
+                            resolve();
+                        })
+                        .catch((error) => reject(error));
+                })
+                .catch((error) => reject(error));
+        });
+    };
+
     
     if(!book){
         return <p>Book not found</p>
     }
 
     return (
-       <EditBookModal book={book} open={open} onClose={handleClose} onEditBook={handleEditBook}/>
+            <EditBookModal book={book} open={open} onClose={handleClose} onEditBook={handleEditBook}/>
     )
 }
 
