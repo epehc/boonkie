@@ -3,29 +3,33 @@ import {AppBar, Toolbar, Button, ButtonGroup} from '@mui/material';
 import Logo from '../../assets/logo.png';
 import {useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/material/styles";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../state/store";
+import {logout} from "../../state/login/loginSlice";
 
-interface HeaderProps {
-    loggedIn: boolean
-    onLogOut: () => void
-}
 
-const Header: React.FC<HeaderProps> = ({loggedIn, onLogOut}) => {
+
+const Header = () => {
     const theme = useTheme()
     const navigate = useNavigate();
+
+    const loggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
+    const isAdmin = useSelector((state: RootState) => state.login.isAdmin)
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleNavigateHome = () => {
         navigate('/books');
     }
 
-    const handleNavigateLoginScreen = () => {
-        navigate('/login');
+    const handleNavigateCart = () => {
+        navigate('/cart');
     }
 
     const handleLogout = () => {
-        onLogOut()
-        navigate('/books');
+        dispatch(logout())
+        navigate('/login');
     }
 
 
@@ -33,20 +37,28 @@ const Header: React.FC<HeaderProps> = ({loggedIn, onLogOut}) => {
         <AppBar position="sticky" sx={{bgColor: theme.palette.primary.main}}>
             <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                 <img onClick={handleNavigateHome} src={Logo} alt="Logo" style={{height: 40, marginRight: 10}}/>
-                <ButtonGroup sx={{position: "flex-end"}}>
-                    {
-                        loggedIn ?
-                            <Button variant="text" sx={{color: theme.palette.text.primary}}
-                                    onClick={handleLogout} startIcon={<NoAccountsIcon/>}>
-                                LOG OUT
-                            </Button>
-                            :
-                            <Button variant="text" sx={{color: theme.palette.text.primary}}
-                                    onClick={handleNavigateLoginScreen} startIcon={<AccountCircleIcon/>}>
-                                LOG IN
-                            </Button>
-                    }
-                </ButtonGroup>
+                { loggedIn &&
+                    <ButtonGroup sx={{position: "flex-end"}}>
+                        {
+                            !isAdmin ?
+                                <>
+                                    <Button variant="text" sx={{color: theme.palette.text.primary, marginRight: '20px'}}
+                                            onClick={handleNavigateCart} startIcon={<ShoppingCartIcon/>}>
+                                        CART
+                                    </Button>
+                                    <Button variant="text" sx={{color: theme.palette.text.primary}}
+                                            onClick={handleLogout} startIcon={<NoAccountsIcon/>}>
+                                        LOG OUT
+                                    </Button>
+                                </>
+                                :
+                                <Button variant="text" sx={{color: theme.palette.text.primary}}
+                                        onClick={handleLogout} startIcon={<NoAccountsIcon/>}>
+                                    LOG OUT
+                                </Button>
+                        }
+                    </ButtonGroup>
+                }
             </Toolbar>
         </AppBar>
     );
