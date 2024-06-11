@@ -60,7 +60,7 @@ const BookPage = () => {
                 <Grid container spacing={15} style={{ marginTop: '20px', marginBottom: '20px', backgroundColor: theme.palette.background.default }}>
                     <Grid xs={4}>
                         <Button sx= {{width: '100%', marginBottom: '20px'}} variant="text" color="primary" onClick={() => navigate('/books')}><u>Back to Books</u></Button>
-                        {book.cover === "" ? <img src={AltCover} alt="No Cover" style={{ maxWidth: '100%', height: 'auto' }}/> : <img src={book.cover} alt="Cover" style={{ maxWidth: '100%', height: 'auto' }}/>}
+                        {book.cover === "" ? <img src={AltCover} alt="No Cover" style={{ maxWidth: '100%', height: 'auto', marginTop:'20px' }}/> : <img src={book.cover} alt="Cover" style={{ width: '100%', height: 'auto' }}/>}
                     </Grid>
                     <Grid xs={8}>
                         <Stack spacing={2}>
